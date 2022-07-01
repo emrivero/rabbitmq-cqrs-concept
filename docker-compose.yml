@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+
+   rabbitmq:
+    image: rabbitmq:3.7.18-management
+    container_name: concept-rabbitmq
+    volumes:
+      - ${CONFIG_PATH_HOST}/rabbitmq/definition.json:/etc/rabbitmq/definition.json
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+      - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbitmq_management load_definitions "/etc/rabbitmq/definition.json"
+    expose:
+      - 5672
+      - 15672
+    ports:
+      - 15672:15672
+      - 5672:5672
+    # labels:
+    #   - traefik.enable=true
+    #   - traefik.http.routers.rabbitui.rule=Host(`${RABBITUI_TRAEFIK_URL}`)
+    #   - traefik.http.routers.rabbitui.entrypoints=http
+    #   - traefik.http.routers.rabbitui.middlewares=https-redirect
+    #   - traefik.http.routers.rabbitui-https.rule=Host(`${RABBITUI_TRAEFIK_URL}`)
+    #   - traefik.http.routers.rabbitui-https.entrypoints=https
+    #   - traefik.http.routers.rabbitui-https.tls=true
+    #   - traefik.http.routers.rabbitui-https.tls.certresolver=le
+    #   - traefik.http.services.rabbitui.loadbalancer.server.port=15672
