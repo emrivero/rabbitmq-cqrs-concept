@@ -26,6 +26,13 @@
   "policies": [],
   "queues": [
     {
+      "name": "events.another",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
       "name": "events.history",
       "vhost": "/",
       "durable": true,
@@ -42,9 +49,9 @@
   ],
   "exchanges": [
     {
-      "name": "devaid-concept",
+      "name": "events",
       "vhost": "/",
-      "type": "topic",
+      "type": "fanout",
       "durable": true,
       "auto_delete": false,
       "internal": false,
@@ -53,19 +60,19 @@
   ],
   "bindings": [
     {
-      "source": "devaid-concept",
+      "source": "events",
       "vhost": "/",
       "destination": "events.default",
       "destination_type": "queue",
-      "routing_key": "events.default",
+      "routing_key": "",
       "arguments": {}
     },
     {
-      "source": "devaid-concept",
+      "source": "events",
       "vhost": "/",
       "destination": "events.history",
       "destination_type": "queue",
-      "routing_key": "events.history",
+      "routing_key": "",
       "arguments": {}
     }
   ]
