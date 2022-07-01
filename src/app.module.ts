@@ -1,14 +1,7 @@
 import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
-import { Connection } from './project/domain/messaging/connection.abstract';
-import { Publisher } from './project/domain/messaging/publisher.abstract';
-import { Subscriber } from './project/domain/messaging/subscriber.abstract';
-import { RBMQ_MESSAGES } from './project/infrastructure/messaging/rbmq/messages';
-import { MessageMapper } from './project/infrastructure/messaging/rbmq/messages/mapper';
-import { RabbitMQConnection } from './project/infrastructure/messaging/rbmq/rbmq-connection';
-import { RabbitMQPublisher } from './project/infrastructure/messaging/rbmq/rbmq-publisher';
-import { RabbitMQSubscriber } from './project/infrastructure/messaging/rbmq/rbmq-subscriber';
+import { MessageBrokerCQRS } from './message-broker-cqrs/message-broker-cqrs.module';
 import { ProjectModule } from './project/project.module';
 
 @Module({
@@ -20,26 +13,8 @@ import { ProjectModule } from './project/project.module';
       uri: 'amqp://admin:admin@localhost:5672',
       connectionInitOptions: { wait: false },
     }),
+    MessageBrokerCQRS,
     ProjectModule,
-  ],
-  providers: [
-    {
-      provide: Connection,
-      useClass: RabbitMQConnection,
-    },
-    {
-      provide: Subscriber,
-      useClass: RabbitMQSubscriber,
-    },
-    {
-      provide: Publisher,
-      useClass: RabbitMQPublisher,
-    },
-    {
-      provide: 'RBMQ_MESSAGES',
-      useValue: RBMQ_MESSAGES,
-    },
-    MessageMapper,
   ],
 })
 export class ApplicationModule {}

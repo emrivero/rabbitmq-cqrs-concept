@@ -1,4 +1,4 @@
-import { GenericEvent } from '../../../domain/messaging/generic.event';
+import { GenericEvent } from '../../domain/event/generic.event';
 import { ToolInstalledEventID } from '../identifiers';
 
 export class ToolInstalledEvent extends GenericEvent {

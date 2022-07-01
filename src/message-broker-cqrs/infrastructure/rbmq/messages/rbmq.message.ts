@@ -1,4 +1,4 @@
-import { GenericEvent } from '../../../../domain/messaging/generic.event';
+import { GenericEvent } from '../../../domain/event/generic.event';
 
 export class RabbitMQMessage<T extends GenericEvent = GenericEvent> {
   constructor(

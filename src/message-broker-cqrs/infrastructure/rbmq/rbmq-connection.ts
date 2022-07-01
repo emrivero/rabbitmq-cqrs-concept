@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { EventBus } from '@nestjs/cqrs';
-import { Connection } from '../../../domain/messaging/connection.abstract';
-import { Publisher } from '../../../domain/messaging/publisher.abstract';
-import { Subscriber } from '../../../domain/messaging/subscriber.abstract';
+import { Connection } from '../../domain/model/connection.abstract';
+import { Publisher } from '../../domain/model/publisher.abstract';
+import { Subscriber } from '../../domain/model/subscriber.abstract';
 
 @Injectable()
 export class RabbitMQConnection extends Connection {

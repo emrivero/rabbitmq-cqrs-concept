@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { ToolInstalledEvent } from '../../application/events/entities/tool-installed.event';
+import { ToolInstalledEvent } from '../../../message-broker-cqrs/application/events/tool-installed.event';
 
 export class Project extends AggregateRoot {
   constructor(
@@ -10,8 +10,10 @@ export class Project extends AggregateRoot {
   ) {
     super();
   }
+
   install() {
     this.tools.forEach((nameTool) => {
+      // TODO: Domain -> message-broker-cqrs/application/events ??
       this.apply(new ToolInstalledEvent(nameTool, this.name));
     });
   }

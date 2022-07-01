@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ToolInstalledEvent } from '../../../../application/events/entities/tool-installed.event';
-import { ToolInstalledEventID } from '../../../../application/events/identifiers';
+import { ToolInstalledEvent } from '../../../application/events/tool-installed.event';
+import { ToolInstalledEventID } from '../../../application/identifiers';
 import { RabbitMQMessage } from './rbmq.message';
 
 @Injectable()

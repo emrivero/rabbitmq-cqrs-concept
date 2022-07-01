@@ -1,6 +1,6 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
+import chalk from 'chalk';
 import { InstallProjectCommand } from '../entities/project-installed.command';
-
 @CommandHandler(InstallProjectCommand)
 export class InstallProjectCommandHandler
   implements ICommandHandler<InstallProjectCommand>
@@ -10,10 +10,13 @@ export class InstallProjectCommandHandler
   async execute(command: InstallProjectCommand) {
     const { dto } = command;
     console.log(
-      '[ProjectCommandHandler] - InstallProjectCommand...',
-      JSON.stringify(dto),
+      chalk.magenta(
+        '[ProjectCommandHandler] - InstallProjectCommand...',
+        JSON.stringify(dto),
+      ),
     );
     const project = this.publisher.mergeObjectContext(dto.toEntity());
+
     project.install();
     project.commit();
   }

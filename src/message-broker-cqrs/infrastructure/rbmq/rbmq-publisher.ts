@@ -1,7 +1,8 @@
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 import { Injectable } from '@nestjs/common';
-import { GenericEvent } from '../../../domain/messaging/generic.event';
-import { Publisher } from '../../../domain/messaging/publisher.abstract';
+import chalk from 'chalk';
+import { GenericEvent } from '../../domain/event/generic.event';
+import { Publisher } from '../../domain/model/publisher.abstract';
 import { MessageMapper } from './messages/mapper';
 
 @Injectable()
@@ -18,7 +19,12 @@ export class RabbitMQPublisher extends Publisher {
   publish(event: unknown) {
     const eventInstance = event as GenericEvent;
     const message = this.messageMapper.map(eventInstance.id);
-    console.log(`[Publish RabbitMQ Message] ${JSON.stringify(eventInstance)}`);
+    console.log(
+      chalk.green(
+        `[Publish RabbitMQ Message] ${JSON.stringify(eventInstance)}`,
+      ),
+    );
+    console.log('...........');
     this.amqpConnection.publish(
       message.exchange,
       '',

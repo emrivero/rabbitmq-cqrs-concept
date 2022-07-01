@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { AnotherRandomEvent } from '../../../../application/events/entities/another-random.event';
-import { AnotherRandomEventID } from '../../../../application/events/identifiers';
+import { AnotherRandomEvent } from '../../../application/events/another-random.event';
+import { AnotherRandomEventID } from '../../../application/identifiers';
 import { RabbitMQMessage } from './rbmq.message';
 
 @Injectable()
